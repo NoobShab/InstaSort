@@ -1,21 +1,20 @@
-# Instagram Trend Identifier
+# Search Sort
 
-## The platform identifies the emerging trends based on post engagements among users, not just popularity. 
+## The project arranges the reels according to the hashtag from the most _viewed, liked, commented, or engaged_ reels to the least. 
 
-This project is dedicated to content creators. Creators who want to stay updated with the current viral or trending reels on Instagram without end-scrolling; rather prioritize on ideas that can help them give practical growth on the social platform. <br><br> This project calculates and gives real-life data driven statistics on what content is going to be on the trending portal in the near future.  
+This project is dedicated to content creators. Creators who want to study the content in their niche and want to think productively about their next content idea -- _Search Sort_ will help them to arrange the reels with the highest engagement to the lowest in their desired hashtag. <br><br>It's the easy way of thinking productively on what your next content will be based on the data-driven user engagements. 
 
 #### What does it solve?
- > It saves time, energy, and allows creators to be a step ahead on their content creation journey. They can generate productive ideas based on the current trend and make sure to grab the audience's attention. 
-
-#### What is a 'trend' in social media?
-> Trend usually refers to videos or reels that are **currently** viewed the most by the users in instagram. It generally shows higher interaction among users compared to other videos in a shorter time window on the platform.
+ > It saves time, energy, and allows creators to be a step ahead on their content creation journey. They can generate productive ideas based on the current trend, and identify what content actually gets traction and what doesn't. 
 
 #### What inputs does the system accept? 
-> 1. A CSV file: containing the data of posts' interactions. 
-2. Time window: mentioning around what time the reel was having growth statistics. 
-3. Number of top trends to display.
-4. Weight for comments and likes. 
+1. A CSV file: containing the data for a single hashtag. 
+2. Hierarchy of the reels based on _views, likes, comments, or engagements_ 
 
 #### What expected outputs does it produce? 
-> 1. Detect trends.
-2. Show the calculated result on why specific niches are trending. 
+1. Ranked lists of the reels sorted by a selected metric.
+2. Metrics supported: 
+    - Views
+    - Likes
+    - Comments
+    - Engagement score
