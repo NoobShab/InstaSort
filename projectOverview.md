@@ -18,3 +18,8 @@ This project is dedicated to content creators. Creators who want to study the co
     - Likes
     - Comments
     - Engagement score
+
+
+### Project Structure
+>> * data/ --> reels_tags.csv
+>> * src/ --> 
