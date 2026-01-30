@@ -3,12 +3,20 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "reel.h"
 
-class Analyze {
-    public: 
-        static std::vector<Reel> filterByHashtag (const std::vector<Reel>& reels, 
-        const std::string& hashtag);
+struct HashtagStats{
+    long long totalViews = 0;
+    long long totalLikes = 0;
+    long long totalComments = 0;
+    long long engagementScore = 0;
+    int reelCount = 0;
+};
+
+namespace Analyze {
+        std::unordered_map<std::string, HashtagStats>
+        rankHashtagsByEngagement(const std::vector<Reel>& reels);
 };
 
 #endif

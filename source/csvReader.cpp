@@ -1,6 +1,7 @@
 #include <sstream> // for separating files with commas
 #include <fstream> // for reading files
 #include "csvReader.h"
+#include <iostream>
 
 std::vector<Reel> CSVReader::readCSV(const std::string& filename) {
     std::vector<Reel> reels;
@@ -8,6 +9,12 @@ std::vector<Reel> CSVReader::readCSV(const std::string& filename) {
     // opens the file for reading 
     std::ifstream file(filename); // 'file' points to '<filename>'
     std::string line;
+
+    // error handling
+    if(!file.is_open()){
+        std::cerr << "Error: Unable to open file" << filename << std::endl;
+        return reels;
+    }
 
     // Skip header
     // std::getline(source, destination, delimiter)

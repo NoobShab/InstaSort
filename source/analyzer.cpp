@@ -1,14 +1,32 @@
 #include "analyzer.h"
 
-std::vector<Reel> Analyze::filterByHashtag(
-    const std::vector<Reel>& reels,
-    const std::string& hashtag) {
-        std::vector<Reel> result;
-
+std::unordered_map<std::string, HashtagStats>
+Analyze::rankHashtagsByEngagement(const std::vector<Reel>& reels){
+    std::unordered_map<std::string, HashtagStats> table;
+    // const std::vector<Reel>& reels,
+    // const std::string& hashtag) {
+        //     std::vector<Reel> result;
+        
         for(const auto& r : reels){
-            if(r.hashtag == hashtag)
-                result.push_back(r);
-        }
+            auto& stats = table[r.hashtag];
 
-        return result;
+            stats.totalViews += r.views;
+            stats.totalLikes += r.likes;
+            stats.totalComments += r.comments;
+
+            stats.engagementScore += r.likes + (2 * r.comments);
+            stats.reelCount++;
+        }
+        
+        return table;
     }
+
+struct EmergingHashtags {
+    std::string hashtag;
+    double emergenceScore;
+    HashtagStats stats;
+};
+  
+std::vector<EmergingHashtags> Analyze :: getTopEmergingHashtags(
+    const std::unordered_map
+)

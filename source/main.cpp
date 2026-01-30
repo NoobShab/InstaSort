@@ -12,7 +12,7 @@ void printHead(){
 int main(){
 
 
-    auto reels = CSVReader::readCSV("/Users/shuvojoti/Doc/RSP/GitDemo/Project01/data/finalReelsData.csv");
+    auto reels = CSVReader::readCSV("/Users/shuvojoti/Doc/RSP/GitDemo/Project01/data/reelsArrangement.csv");
     std::string hashtags;
 
     // Input
@@ -21,6 +21,19 @@ int main(){
     std::cin >> hashtags;;
     std::cout << "\n";
 
+    auto hashtagTable = Analyze::rankHashtagsByEngagement(reels);
+
+    // if filter empty
+    if(hashtagTable.empty()){
+        std::cout << "No reels found for hashtag: #" << hashtags << '\n' << '\n';
+        return 0;
+    }
+
+    // converting hashmap into sortable structure
+    std::vector<std::pair<std::string, HashtagStats>> ranked;
+    for(const auto& entry : hashtagTable) {
+        ranked.push_back(entry);
+    }
 
     // Table headings
     std::cout << std::left <<
@@ -34,14 +47,13 @@ int main(){
 std::cout << std::string(40, '-');
 std::cout << '\n';
 
-    auto filter = Analyze::filterByHashtag(reels, hashtags);
-
-    std::sort(filter.begin(), filter.end(), [](Reel& a, Reel& b){
-        return a.engagement() > b.engagement();
+    
+    std::sort(ranked.begin(), ranked.end(), [](const auto& a, const auto& b){
+        return a.second.engagementScore > b.second.engagementScore;
     });
 
-    for(int i{0}; i < std::min(5, static_cast<int>(filter.size())); i++){
-        const auto& r = filter[i];
+    for(int i{0}; i < std::min(5, static_cast<int>(ranked.size())); i++){
+        // const auto& r = filter[i];
 /*
         if(r.views >= 100000) 
             std::cout << std::left << std::setw(6)
@@ -54,11 +66,13 @@ std::cout << '\n';
 
         std::cout << std::left <<
                 std::setw(6) << (i + 1) <<
-                std::setw(22) << r.reels_id <<
-                std::setw(10) << r.views <<
-                std::setw(10) << r.likes <<
-                std::setw(12) << r.comments <<
-                std::setw(12) << r.engagement() <<
+                // std::setw(22) << r.reels_id <<
+                // std::setw(10) << r.views <<
+                // std::setw(10) << r.likes <<
+                // std::setw(12) << r.comments <<
+                // std::setw(12) << r.engagement() <<
+                std::setw(12) << ranked[i].first <<dda
+                ranked[i].second.engagementScore <<
                 '\n';   
     }
 
@@ -88,7 +102,7 @@ std::cout << '\n';
         const auto& top = filter[0];
         std::cout << "* Top reel has " << 
                     top.engagement() <<
-                    " engagements, which is " <<
+                    " engagements, which is " << std::setprecision(2) <<
                     (top.engagement() * 100 / (int) avgEngagement) <<
                     "% above average.\n\n";
     }
@@ -97,10 +111,6 @@ std::cout << '\n';
         std::cout << ">> The hashtag shows strong visibility potential.\n";
     else if(avgViews >= 0 && avgViews < 100000)
         std::cout << ">> This hashtag shows moderate visibility.\n";
-
-    // if filter empty
-    if(filter.empty())
-        std::cout << "No reels found for hashtag: #" << hashtags << '\n';
 
     return 0;
     
