@@ -32,8 +32,25 @@ for _, row in df.iterrows():
                 "timestamp" : timestamp
             })
 
+# check for the invalid values
+def clean_data(rows):
+    cleaned = []
+
+    for row in rows:
+        views = int(row["views"])
+        likes = int(row["likes"])
+
+        if views == 0:
+            continue #skip the reel
+        if likes == -1:
+            continue
+            
+        cleaned.append(row)
+
+    return cleaned 
+
 # Now create arranged dataframe
-arranged_df = pd.DataFrame(rows)
+arranged_df = pd.DataFrame(clean_data(rows))
 
 # Save to CSV
 arranged_df.to_csv(OUTPUT_CSV, index = False)
