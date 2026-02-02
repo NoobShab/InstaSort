@@ -50,40 +50,6 @@ std::vector<EmergingHashtags> Analyze :: getTopEmergingHashtags(
         return result;
     }
 
-/*
-// Single hashtag search : option [3]
-HashtagStats analyzeSingleHashtag(
-    const std::string& hashtag,
-    const std::vector<Post>& posts) {
-        HashtagStats stats{};
-        stats.hashtag = hashtag;
-        
-        long validPosts = 0;
-        
-        for(const auto& post : posts){
-            stats.totalViews += post.views;
-            stats.totalLikes += post.likes;
-            stats.totalComments += post.comments;
-            validPosts++;
-        }
-        
-        stats.postCount = validPosts;
-        
-        if (validPosts > 0){
-            stats.avgViews = static_cast<double>(stats.totalViews) / validPosts;
-            stats.avgLikes = static_cast<double>(stats.totalLikes) / validPosts;
-            stats.avgComments = static_cast<double>(stats.totalComments) / validPosts;
-        }
-        
-        stats.engagementScore = stats.totalLikes + (2 * stats.totalComments); 
-        // (stats.avgLikes * 0.5) +
-        // (stats.avgComments * 0.3) +
-        // (stats.avgViews * 0.2);
-        
-        return stats;
-    }
-    */
-
 std::vector<HashtagStats> Analyze::getRankedHashtags(
     const std::unordered_map<std::string, HashtagStats>& hashtagMap
 ){

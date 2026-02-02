@@ -39,6 +39,10 @@ int main(){
 
         std::cout << "Enter choice: ";
         std::cin >> choice;
+        if(choice != 1 && choice != 2 && choice != 3 && choice !=4){
+            std::cout << "Please enter a valid number.\n\n";
+            break;
+        }
 
         if(choice == 4) break;
 
@@ -55,7 +59,7 @@ int main(){
                                    << std::setw(13) << "Views"
                                    << "Engagement\n";
             
-            for(int i = 0; i < std::min(5, static_cast<int>(ranked.size())); i++){
+            for(int i = 0; i < std::min(10, static_cast<int>(ranked.size())); i++){
                 std::cout << std::setw(6) << i + 1
                           << std::setw(15) << ranked[i].hashtag
                           << std::setw(8) << ranked[i].reelCount
@@ -79,7 +83,7 @@ int main(){
                       << "Avg Engagement\n";
             std::cout << "--------------------------------------------\n";
             
-            for(int i = 0; i < std::min(5, static_cast<int>(emerging.size())); i++){
+            for(int i = 0; i < std::min(10, static_cast<int>(emerging.size())); i++){
                 std::cout << std::setw(6) << i + 1
                           << std::setw(17) << emerging[i].hashtag
                           << std::setw(8) << emerging[i].stats.reelCount
